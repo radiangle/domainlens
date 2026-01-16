@@ -1,13 +1,14 @@
 "use client";
 
-import { forwardRef, HTMLAttributes } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { forwardRef, ReactNode } from "react";
+import { motion } from "framer-motion";
 
-export interface CardProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, keyof HTMLMotionProps<"div">> {
+export interface CardProps {
   variant?: "default" | "elevated" | "bordered";
   hover?: boolean;
   accentColor?: "orange" | "blue" | "purple" | "green" | "cyan" | "red";
+  children?: ReactNode;
+  className?: string;
 }
 
 const variants = {
@@ -33,7 +34,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       hover = true,
       accentColor,
       className = "",
-      ...props
     },
     ref
   ) => {
@@ -50,7 +50,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
           ${accentColor ? accentColors[accentColor] : "hover:border-border-light"}
           ${className}
         `}
-        {...props}
       >
         {children}
       </motion.div>
