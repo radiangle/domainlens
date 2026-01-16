@@ -6,9 +6,15 @@ export async function POST(
   request: NextRequest
 ): Promise<NextResponse<ApiResponse<VisualizeResponse>>> {
   try {
-    const body: VisualizeRequest = await request.json();
+    const body = await request.json().catch(() => null);
 
-    if (!body.domain) {
+    if (
+      body === null ||
+      typeof body !== "object" ||
+      Array.isArray(body) ||
+      typeof (body as any).domain !== "string" ||
+      (body as any).domain.trim() === ""
+    ) {
       return NextResponse.json(
         { success: false, error: "Domain is required" },
         { status: 400 }
