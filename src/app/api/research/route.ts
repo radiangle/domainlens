@@ -8,7 +8,7 @@ export async function POST(
   try {
     const body: ResearchRequest = await request.json();
 
-    if (!body.domain || body.domain.trim().length < 10) {
+    if (typeof body.domain !== "string" || body.domain.trim().length < 10) {
       return NextResponse.json(
         { success: false, error: "Domain description is required (min 10 characters)" },
         { status: 400 }
