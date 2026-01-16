@@ -1,13 +1,17 @@
 "use client";
 
-import { forwardRef, ButtonHTMLAttributes } from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { forwardRef, ReactNode, MouseEventHandler } from "react";
+import { motion } from "framer-motion";
 
-export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof HTMLMotionProps<"button">> {
+export interface ButtonProps {
   variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   isLoading?: boolean;
+  children?: ReactNode;
+  disabled?: boolean;
+  type?: "button" | "submit" | "reset";
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  className?: string;
 }
 
 const variants = {
@@ -33,14 +37,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       isLoading = false,
       disabled,
+      type = "button",
+      onClick,
       className = "",
-      ...props
     },
     ref
   ) => {
     return (
       <motion.button
         ref={ref}
+        type={type}
+        onClick={onClick}
         whileHover={{ y: -2 }}
         whileTap={{ scale: 0.98 }}
         disabled={disabled || isLoading}
@@ -53,7 +60,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ${sizes[size]}
           ${className}
         `}
-        {...props}
       >
         {isLoading && (
           <svg

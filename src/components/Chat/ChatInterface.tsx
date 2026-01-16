@@ -12,7 +12,9 @@ interface ChatInterfaceProps {
   systemPrompt?: string;
 }
 
-export function ChatInterface({ systemPrompt }: ChatInterfaceProps) {
+export function ChatInterface({ systemPrompt: _systemPrompt }: ChatInterfaceProps) {
+  // systemPrompt would be used in production to configure the agent
+  void _systemPrompt;
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);

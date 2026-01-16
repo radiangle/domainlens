@@ -8,7 +8,7 @@ interface EntityGridProps {
   entities: Entity[];
 }
 
-const typeColors: Record<string, "orange" | "blue" | "purple" | "green" | "cyan"> = {
+const typeColors: Record<string, "orange" | "blue" | "purple" | "green" | "cyan" | "red" | "gray"> = {
   Defect: "red",
   Process: "orange",
   Method: "blue",
