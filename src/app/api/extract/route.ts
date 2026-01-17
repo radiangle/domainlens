@@ -15,8 +15,8 @@ export async function POST(
       );
     }
 
-    // Simulate API latency for demo
-    await new Promise((resolve) => setTimeout(resolve, 2500));
+    // Simulate API latency for demo (matches terminal animation ~6.3s)
+    await new Promise((resolve) => setTimeout(resolve, 6800));
 
     // In production, this would call the TinyFish/AgentQL API
     // For demo, return mock data
