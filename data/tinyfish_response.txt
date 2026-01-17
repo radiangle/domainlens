@@ -1,0 +1,98 @@
+quynhle@Quynhs-MacBook-Pro ~ % urls=( "https://corrosionpedia.com/definition/sensitization" "https://www.corrosion-doctors.org/Localized/pitting.htm" "https://www.twi-global.com/technical-knowledge/faqs/what-is-stress-corrosion-cracking" ) for url in "${urls[@]}"; do curl -X POST https://mino.ai/v1/automation/run-sse \ -H "X-API-Key: ***REDACTED***" \ -H "Content-Type: application/json" \ -d "{ \"url\": \"$url\", \"goal\": \"Extract stainless steel defect info: defect_name, description, temperature_range, causes, affected_grades, testing_standards, prevention_methods. Return JSON.\" }" & done wait echo "Done"
+zsh: parse error near `for'
+quynhle@Quynhs-MacBook-Pro ~ % urls=("https://corrosionpedia.com/definition/sensitization" "https://www.corrosion-doctors.org/Localized/pitting.htm" "https://www.twi-global.com/technical-knowledge/faqs/what-is-stress-corrosion-cracking"); for url in "${urls[@]}"; do curl -X POST https://mino.ai/v1/automation/run-sse -H "X-API-Key: ***REDACTED***" -H "Content-Type: application/json" -d "{\"url\": \"$url\", \"goal\": \"Extract stainless steel defect info: defect_name, description, temperature_range, causes, affected_grades, testing_standards, prevention_methods. Return JSON.\"}" & done; wait; echo "Done"
+[2] 21937
+[3] 21938
+[4] 21939
+data: {"type":"STARTED","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","timestamp":"2026-01-17T00:03:09.060Z"}
+
+data: {"type":"STARTED","runId":"e6b6ea9d-9cc4-4bf5-88b8-837c3b1597cd","timestamp":"2026-01-17T00:03:09.063Z"}
+
+data: {"type":"STARTED","runId":"62ecdaee-3432-485a-87a7-544f27463643","timestamp":"2026-01-17T00:03:09.069Z"}
+
+data: {"type":"STREAMING_URL","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","streamingUrl":"https://ip-54-183-146-219.tetra-data.production.tinyfish.io/tf-7d9b3862-97e7-43a6-9986-1ebb61837487/stream/0","timestamp":"2026-01-17T00:03:16.385Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Navigate to the defect page","timestamp":"2026-01-17T00:03:16.396Z"}
+
+data: {"type":"STREAMING_URL","runId":"e6b6ea9d-9cc4-4bf5-88b8-837c3b1597cd","streamingUrl":"https://ip-54-219-224-211.tetra-data.production.tinyfish.io/tf-0ffad35b-1353-4ed6-af96-c76d2c012aa5/stream/0","timestamp":"2026-01-17T00:03:16.565Z"}
+
+data: {"type":"PROGRESS","runId":"e6b6ea9d-9cc4-4bf5-88b8-837c3b1597cd","purpose":"Navigate to the page","timestamp":"2026-01-17T00:03:16.580Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Extract stainless steel defect info","timestamp":"2026-01-17T00:03:20.577Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Understand page content for extraction","timestamp":"2026-01-17T00:03:24.482Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Re-navigate to the defect page","timestamp":"2026-01-17T00:03:29.850Z"}
+
+data: {"type":"PROGRESS","runId":"e6b6ea9d-9cc4-4bf5-88b8-837c3b1597cd","purpose":"Extract all defect information","timestamp":"2026-01-17T00:03:31.864Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Check content again after re-navigating","timestamp":"2026-01-17T00:03:32.887Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Navigate to root domain to search","timestamp":"2026-01-17T00:03:36.442Z"}
+
+data: {"type":"HEARTBEAT","timestamp":"2026-01-17T00:03:39.071Z"}
+
+data: {"type":"PROGRESS","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","purpose":"Check for main page content","timestamp":"2026-01-17T00:03:40.134Z"}
+
+data: {"type":"COMPLETE","runId":"e6b6ea9d-9cc4-4bf5-88b8-837c3b1597cd","status":"COMPLETED","timestamp":"2026-01-17T00:03:45.762Z","resultJson":{"defect_name":"Sensitization","description":"Sensitization is the loss of alloy integrity. It results from chromium depletion in the vicinity of carbides precipitated at grain boundaries. This causes the steel or alloy to become susceptible to intergranular corrosion or intergranular stress corrosion cracking (SCC).","temperature_range":"425 – 815°C","causes":["Chromium carbides precipitate at the grain boundaries","Carbides are insoluble at these temperatures","Chromium depletion from surrounding metal to form carbides creating chromium-depleted zones","Occurs during welding or annealing after cold working","Specific combinations of temperature, time, and composition"],"affected_grades":["Stainless steel (austenitic)","Ferritic stainless steels","Duplex stainless steels"],"testing_standards":["ASTM A262 (for austenitic steels, Practice A: oxalic acid etch test)","ASTM A763 (for ferritic steels, Practice W: oxalic acid etch test)"],"prevention_methods":["Reducing the carbon content","Adding stabilizers such as niobium or titanium","Reducing the time of exposure to the critical temperature range"]}}
+
+[2]    done       curl -X POST https://mino.ai/v1/automation/run-sse -H  -H  -d 
+data: {"type":"COMPLETE","runId":"55c819e7-95be-4ca3-ba18-1b1cc23407a9","status":"COMPLETED","timestamp":"2026-01-17T00:03:45.948Z","resultJson":{"defect_name":"Pitting Corrosion","description":"N/A - The target URL returned a 'Not Found' (404) error, and the required information could not be extracted.","temperature_range":"N/A","causes":"N/A","affected_grades":"N/A","testing_standards":"N/A","prevention_methods":"N/A"}}
+
+[3]  - done       curl -X POST https://mino.ai/v1/automation/run-sse -H  -H  -d 
+data: {"type":"HEARTBEAT","timestamp":"2026-01-17T00:04:09.072Z"}
+
+data: {"type":"STREAMING_URL","runId":"62ecdaee-3432-485a-87a7-544f27463643","streamingUrl":"https://ip-54-215-119-77.tetra-data.production.tinyfish.io/tf-386c0e50-d5d5-4544-a8b4-becc72ca7b43/stream/0","timestamp":"2026-01-17T00:04:23.356Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Navigate to the page","timestamp":"2026-01-17T00:04:23.367Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Extract SCC information","timestamp":"2026-01-17T00:04:27.464Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Try visiting the URL again","timestamp":"2026-01-17T00:04:31.249Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Visit home page to search","timestamp":"2026-01-17T00:04:34.256Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Accept cookies","timestamp":"2026-01-17T00:04:51.190Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Open search bar","timestamp":"2026-01-17T00:04:55.185Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Input search term","timestamp":"2026-01-17T00:04:59.742Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Perform search","timestamp":"2026-01-17T00:05:03.033Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Analyze search results","timestamp":"2026-01-17T00:05:08.798Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Input search term SCC","timestamp":"2026-01-17T00:05:19.309Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Perform search with SCC","timestamp":"2026-01-17T00:05:22.533Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Visit original URL to confirm error","timestamp":"2026-01-17T00:05:30.141Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Visit home page to find Technical Knowledge","timestamp":"2026-01-17T00:05:36.511Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Go to Technical knowledge section","timestamp":"2026-01-17T00:05:51.260Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Go to FAQs section","timestamp":"2026-01-17T00:05:56.666Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Search FAQs for SCC","timestamp":"2026-01-17T00:06:02.501Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Search FAQs","timestamp":"2026-01-17T00:06:06.158Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Go to next page of FAQ search results","timestamp":"2026-01-17T00:06:13.024Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Analyze search results on page 2","timestamp":"2026-01-17T00:06:16.670Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Go to page 3 of FAQ search results","timestamp":"2026-01-17T00:06:20.500Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Analyze search results on page 3","timestamp":"2026-01-17T00:06:23.580Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Go to page 4 of FAQ search results","timestamp":"2026-01-17T00:06:29.112Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Visit article on duplex steel cracking","timestamp":"2026-01-17T00:06:34.063Z"}
+
+data: {"type":"PROGRESS","runId":"62ecdaee-3432-485a-87a7-544f27463643","purpose":"Extract SCC information from the article","timestamp":"2026-01-17T00:06:39.964Z"}
+
+data: {"type":"COMPLETE","runId":"62ecdaee-3432-485a-87a7-544f27463643","status":"COMPLETED","timestamp":"2026-01-17T00:06:54.406Z","resultJson":{"defect_name":"Stress Corrosion Cracking (SCC)","description":"The original general article on Stress Corrosion Cracking (SCC) was unavailable (404 error). The information provided is extracted from an article specifically about Sulphide Stress Cracking (SSC), a form of SCC, in duplex stainless steels. SSC occurrence and factors are discussed, noting that cracks typically initiate at pits.","temperature_range":"No specific temperature range is mentioned on the page for SSC occurrence.","causes":"Sulphide Stress Cracking (SSC) is related to critical chloride concentration and the threshold stress. Cracks initiate at pits.","affected_grades":"Specifically mentions 22%Cr duplex stainless steel and 22%Cr-3%Mo duplex stainless steel.","testing_standards":"The page refers to 'threshold stress required for SSC to occur' and 'critical chloride concentration for SSC to occur' as measurable factors, but no specific testing standards (e.g., ASTM, ISO, NACE) are detailed.","prevention_methods":"Increasing the nickel (Ni) content (e.g., from 3.5% to 7.5%) in 22%Cr duplex stainless steel can increase the critical chloride concentration for SSC and the threshold stress. Maintaining ferrite content at 40-45% in 22%Cr-3%Mo duplex stainless steel is also beneficial, as resistance to SSC peaks at this range. Electrochemical interaction between ferrite and austenite phases inhibits SSC."}}
+
+[4]  + done       curl -X POST https://mino.ai/v1/automation/run-sse -H  -H  -d 
+Done

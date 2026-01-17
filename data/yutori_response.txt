@@ -1,0 +1,66 @@
+### Stainless steel defects: causes, ranges, tests, prevention
+
+I compiled a concise technical reference on four stainless steel metallurgy
+defects with causes, temperature ranges, testing standards, and prevention
+methods. Sources are cited inline. 
+
+**1) Sensitization.** Precipitation of chromium-rich carbides at grain
+  boundaries depletes adjacent chromium below the critical level when exposed
+  within the sensitization range during welding or heat treatment. [1]
+- **Temperature ranges:** Formation 550°C–850°C (often cited 500–800°C).
+  Prevention: keep below 425°C or rapidly cool; solution anneal 1050–1100°C then
+  rapid quench. [1]
+- **Testing standards:** ASTM A262 (Practices A, B, C, E, F); ASTM A923; ISO
+  3651-2. [1]
+- **Prevention:** Low-carbon grades (304L, 316L); Ti/Nb-stabilized grades (321,
+  347); solution anneal and rapid quench; fast cooling during welding/heat
+  treatment. [1]
+
+**2) SCC (stress corrosion cracking).** Requires susceptible material, corrosive
+  environment (often chlorides or caustics), and tensile stress; often initiates
+  at pits then propagates brittlely. [1]
+- **Temperature ranges:** Typically above 100°C; commonly tested at 155°C; can
+  occur as low as 55°C in highly oxidizing conditions for duplex stainless
+  steels. Prevention targets: below 50°C in chloride environments; below 100°C
+  generally. [1]
+- **Testing standards:** ASTM G36, G129, G39, G123; NACE MR0175/ISO 15156. [1]
+- **Prevention:** Material upgrades (duplex 2205, 2507; super austenitics 254
+  SMO, AL-6XN); stress relief/PWHT; control chlorides, pH, temperature;
+  protective coatings; cathodic protection. [1]
+
+**3) Pitting.** Passive film breakdown by chlorides at weak sites (e.g., MnS
+  inclusions) creates active pits with acidic, concentrated chloride chemistry.
+  [1]
+- **Temperature ranges:** Risk increases with temperature; CPT varies by alloy
+  (~10°C to 85°C+). Examples: 316L ~20–25°C in seawater; 254 SMO ~65°C.
+  Prevention: operate below alloy CPT (often 30–40°C for standard grades in
+  chlorides). [1]
+- **Testing standards:** ASTM G48 (Methods E, F for CPT/CCT), ASTM G150, ASTM
+  G61. [1]
+- **Prevention:** Higher-PREN alloys (e.g., 316L, 2205, 254 SMO); smooth
+  finishes; reduce chlorides, lower temperature, raise pH; inhibitors; cathodic
+  protection. [1]
+
+**4) PASCC (polythionic acid SCC).** Affects sensitized austenitic stainless
+  steels and some nickel alloys when polythionic acids form from sulfur compounds
+  with moisture and oxygen, attacking chromium-depleted grain boundaries—often
+  during shutdowns. [1]
+- **Temperature ranges:** Sensitization 370°C–815°C; cracking at ~20–100°C
+  during shutdowns when moisture and oxygen are present. Prevention: avoid
+  sensitization; maintain dry, sulfur-free shutdown conditions. [1]
+- **Testing standards:** ASTM G35 (room temperature 22–25°C); NACE MR0175/ISO
+  15156. [1]
+- **Prevention:** Low-carbon or stabilized grades; solution anneal PWHT; water
+  flush then neutralize with sodium bicarbonate/carbonate; keep equipment dry;
+  inert gas blanketing (nitrogen purge). [1]
+
+| Defect        | Primary Cause                                    | Critical Temperature | Key Testing Standard | Primary Prevention                    |
+| ------------- | ------------------------------------------------ | -------------------- | -------------------- | ------------------------------------- |
+| Sensitization | Cr-carbide precipitation at grain boundaries     | 550–850°C formation  | ASTM A262            | Low-C grades or stabilization         |
+| SCC           | Stress + corrosive environment (chlorides)       | >100°C typical       | ASTM G36, G129       | Material upgrade, stress relief       |
+| Pitting       | Passive film breakdown by chlorides              | CPT varies (10–85°C) | ASTM G48             | Higher alloyed grades, surface finish |
+| PASCC         | Polythionic acid attack on sensitized boundaries | 20–100°C (cracking)  | ASTM G35             | Prevent sensitization, dry shutdowns  |
+
+---
+
+[1] https://www.astm.org/

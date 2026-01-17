@@ -1,41 +1,36 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Card, Badge } from "@/components/ui";
 import { Message } from "./Message";
 import { ChatInput } from "./ChatInput";
-import { mockChatMessages } from "@/data/mockData";
 import type { ChatMessage } from "@/lib/types";
 
 interface ChatInterfaceProps {
   systemPrompt?: string;
+  domain?: string;
 }
 
-export function ChatInterface({ systemPrompt: _systemPrompt }: ChatInterfaceProps) {
-  // systemPrompt would be used in production to configure the agent
-  void _systemPrompt;
+export function ChatInterface({ systemPrompt, domain }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const hasInitialized = useRef(false);
 
   useEffect(() => {
-    // Load mock messages with staggered timing for demo effect
-    const loadMessages = async () => {
-      for (let i = 0; i < mockChatMessages.length; i++) {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-        setMessages((prev) => [
-          ...prev,
-          {
-            ...mockChatMessages[i],
-            id: `msg-${i}`,
-            timestamp: Date.now(),
-          },
-        ]);
-      }
-    };
-    loadMessages();
-  }, []);
+    // Add initial greeting message
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      const greeting: ChatMessage = {
+        id: "msg-greeting",
+        role: "agent",
+        content: `Hello! I'm your ${domain || "Domain"} Expert Agent. I've been trained on specialized knowledge about this domain and I'm ready to help you with analysis, questions, and recommendations. What would you like to explore?`,
+        timestamp: Date.now(),
+      };
+      setMessages([greeting]);
+    }
+  }, [domain]);
 
   useEffect(() => {
     if (messagesEndRef.current && typeof messagesEndRef.current.scrollIntoView === "function") {
@@ -43,29 +38,61 @@ export function ChatInterface({ systemPrompt: _systemPrompt }: ChatInterfaceProp
     }
   }, [messages]);
 
-  const handleSend = (content: string) => {
+  const handleSend = useCallback(async (content: string) => {
     const userMessage: ChatMessage = {
       id: `msg-${Date.now()}`,
       role: "user",
       content,
       timestamp: Date.now(),
     };
+
     setMessages((prev) => [...prev, userMessage]);
     setIsTyping(true);
 
-    // Simulate agent response
-    setTimeout(() => {
-      const agentMessage: ChatMessage = {
+    try {
+      const allMessages = [...messages, userMessage];
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: allMessages,
+          systemPrompt: systemPrompt || `You are a helpful AI assistant specialized in ${domain || "general topics"}.`,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success && result.data?.message) {
+        const agentMessage: ChatMessage = {
+          id: `msg-${Date.now() + 1}`,
+          role: "agent",
+          content: result.data.message,
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, agentMessage]);
+      } else {
+        const errorMessage: ChatMessage = {
+          id: `msg-${Date.now() + 1}`,
+          role: "agent",
+          content: `I apologize, but I encountered an error: ${result.error || "Unknown error"}. Please try again.`,
+          timestamp: Date.now(),
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
+      const errorMessage: ChatMessage = {
         id: `msg-${Date.now() + 1}`,
         role: "agent",
-        content:
-          "I understand your question. Based on my analysis of the steel sample characteristics you've described, I would recommend performing additional electrochemical testing to confirm the diagnosis. Would you like me to elaborate on the specific testing procedures?",
+        content: "I apologize, but I'm having trouble connecting. Please check that the API is configured correctly and try again.",
         timestamp: Date.now(),
       };
-      setMessages((prev) => [...prev, agentMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
-  };
+    }
+  }, [messages, systemPrompt, domain]);
 
   return (
     <motion.div

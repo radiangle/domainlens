@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HeroSection } from "@/components/Hero";
-import { PipelineSteps } from "@/components/Pipeline";
+import { PipelineSteps, StepProgress } from "@/components/Pipeline";
 import { KnowledgeCard, EntityGrid } from "@/components/Knowledge";
 import { VisualGrid } from "@/components/Visuals";
 import { DataTable } from "@/components/Data";
@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui";
 
 export default function Home() {
   const {
+    domain,
     currentStage,
     research,
     extract,
@@ -25,12 +26,23 @@ export default function Home() {
     isComplete,
   } = usePipeline();
 
+  const progressRef = useRef<HTMLDivElement>(null);
+
   // Auto-run pipeline when started
   useEffect(() => {
     if (currentStage === "research") {
       runPipeline();
     }
   }, [currentStage, runPipeline]);
+
+  // Auto-scroll to terminal when stage changes
+  useEffect(() => {
+    if (currentStage !== "idle" && currentStage !== "complete" && progressRef.current) {
+      setTimeout(() => {
+        progressRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    }
+  }, [currentStage]);
 
   return (
     <div className="min-h-screen">
@@ -57,6 +69,67 @@ export default function Home() {
 
       {/* Pipeline Steps */}
       <PipelineSteps />
+
+      {/* Loading Progress */}
+      <div ref={progressRef}>
+        <AnimatePresence mode="wait">
+          {currentStage === "research" && (
+            <motion.div
+              key="research-progress"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-8 px-4"
+            >
+              <StepProgress stage="research" tool="Yutori" color="orange" />
+            </motion.div>
+          )}
+          {currentStage === "extract" && (
+            <motion.div
+              key="extract-progress"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-8 px-4"
+            >
+              <StepProgress stage="extract" tool="TinyFish" color="blue" />
+            </motion.div>
+          )}
+          {currentStage === "visualize" && (
+            <motion.div
+              key="visualize-progress"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-8 px-4"
+            >
+              <StepProgress stage="visualize" tool="Freepik" color="purple" />
+            </motion.div>
+          )}
+          {currentStage === "synthesize" && (
+            <motion.div
+              key="synthesize-progress"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-8 px-4"
+            >
+              <StepProgress stage="synthesize" tool="Tonic Fabricate" color="green" />
+            </motion.div>
+          )}
+          {currentStage === "generate" && (
+            <motion.div
+              key="generate-progress"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="py-8 px-4"
+            >
+              <StepProgress stage="generate" tool="Cline" color="cyan" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       {/* Results Sections */}
       <AnimatePresence mode="wait">
@@ -149,7 +222,7 @@ export default function Home() {
                 subtitle="Generated via Cline"
                 color="cyan"
               />
-              <ChatInterface systemPrompt={generate.systemPrompt} />
+              <ChatInterface systemPrompt={generate.systemPrompt} domain={domain} />
             </div>
           </motion.section>
         )}
