@@ -15,6 +15,7 @@ export function usePipeline() {
     generate,
     error,
     startTime,
+    useRealAPIs,
     setStage,
     setResearch,
     setExtract,
@@ -33,7 +34,7 @@ export function usePipeline() {
       const researchRes = await fetch("/api/research", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain }),
+        body: JSON.stringify({ domain, useRealAPIs }),
       });
       const researchData = await researchRes.json();
       if (!researchData.success) throw new Error(researchData.error);
@@ -44,7 +45,7 @@ export function usePipeline() {
       const extractRes = await fetch("/api/extract", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain, researchData: researchData.data }),
+        body: JSON.stringify({ domain, researchData: researchData.data, useRealAPIs }),
       });
       const extractData = await extractRes.json();
       if (!extractData.success) throw new Error(extractData.error);
@@ -55,7 +56,7 @@ export function usePipeline() {
       const visualRes = await fetch("/api/visualize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain, entities: extractData.data.entities }),
+        body: JSON.stringify({ domain, entities: extractData.data.entities, useRealAPIs }),
       });
       const visualData = await visualRes.json();
       if (!visualData.success) throw new Error(visualData.error);
@@ -70,6 +71,7 @@ export function usePipeline() {
           domain,
           entities: extractData.data.entities,
           relationships: extractData.data.relationships,
+          useRealAPIs,
         }),
       });
       const synthData = await synthRes.json();
@@ -86,6 +88,7 @@ export function usePipeline() {
           research: researchData.data,
           extract: extractData.data,
           synthesize: synthData.data,
+          useRealAPIs,
         }),
       });
       const genData = await genRes.json();
@@ -99,6 +102,7 @@ export function usePipeline() {
     }
   }, [
     domain,
+    useRealAPIs,
     setStage,
     setResearch,
     setExtract,

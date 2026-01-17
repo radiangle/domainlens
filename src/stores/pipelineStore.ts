@@ -56,6 +56,7 @@ export interface PipelineState {
   generate: GenerateResult | null;
   error: string | null;
   startTime: number | null;
+  useRealAPIs: boolean;
 
   setDomain: (domain: string) => void;
   startPipeline: () => void;
@@ -67,6 +68,7 @@ export interface PipelineState {
   setSynthesize: (result: SynthesizeResult) => void;
   setGenerate: (result: GenerateResult) => void;
   setError: (error: string) => void;
+  setUseRealAPIs: (useReal: boolean) => void;
   reset: () => void;
 }
 
@@ -89,6 +91,7 @@ export const usePipelineStore = create<PipelineState>((set) => ({
   generate: null,
   error: null,
   startTime: null,
+  useRealAPIs: false,
 
   setDomain: (domain) => set({ domain }),
 
@@ -145,6 +148,8 @@ export const usePipelineStore = create<PipelineState>((set) => ({
         ),
       };
     }),
+
+  setUseRealAPIs: (useReal) => set({ useRealAPIs: useReal }),
 
   reset: () =>
     set({
