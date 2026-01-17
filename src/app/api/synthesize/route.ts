@@ -26,7 +26,7 @@ export async function POST(
     // Validate required fields
     if (typeof body.domain !== "string" || body.domain.trim().length === 0) {
       return NextResponse.json(
-        { success: false, error: "Domain is required and must be a non-empty string" },
+        { success: false, error: "Domain is required" },
         { status: 400 }
       );
     }
