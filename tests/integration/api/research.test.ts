@@ -25,8 +25,8 @@ describe("POST /api/research", () => {
     expect(response.status).toBe(200);
     expect(data.success).toBe(true);
     expect(data.data).toBeDefined();
-    expect(data.data.title).toBe("Steel Metallurgy Defect Analysis");
-    expect(data.data.sources).toHaveLength(5);
+    expect(data.data.title).toBe("Stainless Steel Defects: Causes, Ranges, Tests, Prevention");
+    expect(data.data.sources).toHaveLength(6);
     expect(data.data.parameters).toBeDefined();
   });
 

@@ -1,10 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui";
+import { Badge, Toggle } from "@/components/ui";
 import { DomainInput } from "./DomainInput";
+import { usePipelineStore } from "@/stores/pipelineStore";
 
 export function HeroSection() {
+  const { useRealAPIs, setUseRealAPIs, currentStage } = usePipelineStore();
+  const isRunning = currentStage !== "idle" && currentStage !== "complete";
+
   return (
     <section className="relative py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -51,6 +55,28 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <DomainInput />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-6 flex justify-center"
+        >
+          <div className="bg-background-card border border-border rounded-xl px-4 py-3">
+            <Toggle
+              enabled={useRealAPIs}
+              onChange={setUseRealAPIs}
+              labelLeft="Demo Mode"
+              labelRight="Real APIs"
+              disabled={isRunning}
+            />
+            {useRealAPIs && (
+              <p className="text-xs text-text-muted mt-2">
+                Requires API keys in .env.local
+              </p>
+            )}
+          </div>
         </motion.div>
       </div>
     </section>
