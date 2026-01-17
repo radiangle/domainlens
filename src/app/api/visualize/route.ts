@@ -15,8 +15,8 @@ export async function POST(
       );
     }
 
-    // Simulate API latency for demo
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    // Simulate API latency for demo (matches terminal animation ~5.5s)
+    await new Promise((resolve) => setTimeout(resolve, 6000));
 
     // In production, this would call the Freepik API
     // For demo, return mock data

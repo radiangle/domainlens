@@ -15,8 +15,8 @@ export async function POST(
       );
     }
 
-    // Simulate API latency for demo
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    // Simulate API latency for demo (matches terminal animation ~7s)
+    await new Promise((resolve) => setTimeout(resolve, 7500));
 
     // In production, this would call the Yutori API
     // For demo, return mock data
